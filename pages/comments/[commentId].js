@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 export default function commentPage() {
     const [comments, setComments] = useState([]);
-    const [cmtId, setCmtId] = useState();
     const router = useRouter();
-    console.log(router);
-    const fun = () => {
-
-        let postId = parseInt(router.query.commentId) + 1;
+    let commentID = router.query.commentId;
+    const [pic,setPic]=useState();
+    const getComments = () => {
+        let postId = parseInt(commentID) + 1;
+        setPic((JSON.parse(router.query.object))["url"]);
+        console.log(pic);
         let url = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`;
 
         axios.get(url).then((response) => {
@@ -21,25 +23,34 @@ export default function commentPage() {
     }
 
     useEffect(() => {
-        if (!cmtId)
+        if (!commentID)
             return;
-        fun();
-    }, [cmtId]);
+        getComments();
+    }, [commentID]);
 
-    useEffect(() => {
-        setCmtId(router.query.commentId);
-    }, [router.query.commentId]);
+
+
 
 
 
     return (
         <>
-            <div>Commentpage</div>
-            {
-                comments.map((comment) => {
-                    return <div className='border-2 py-1'>{comment}</div>
-                })
-            }
+            <div className="flex flex-col">
+
+
+                {/* <div >
+                    <Image src={pic}  width={200} height={200}/>
+                </div> */}
+
+
+                <div className='px-4'>
+                    {
+                        comments.map((comment) => {
+                            return <div className='border-2 py-1'>{comment}</div>
+                        })
+                    }
+                </div>
+            </div>
         </>
 
     )

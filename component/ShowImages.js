@@ -11,12 +11,11 @@ export default function ShowImages(props) {
           photosArray.map((photoDetails, idx) => {
             return (
               <>
-             
-                <Link href={`/comments/${idx}`}>
+                <Link href={{ pathname: `/comments/${idx}`, query: { object: JSON.stringify(photoDetails) } }}>
                   <Image src={photoDetails.thumbnailUrl} width={150} height={150} />
                 </Link>
               </>
-              
+
             )
           })
         }

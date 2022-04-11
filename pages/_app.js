@@ -4,8 +4,8 @@ import Head from 'next/head'
 function MyApp({ Component, pageProps }) {
   return (
     <>
-    <Head>
-       
+      <Head>
+
         <script src="https://cdn.tailwindcss.com"></script>
 
       </Head>
