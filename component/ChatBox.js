@@ -10,10 +10,15 @@ export default function ChatBox(props) {
 
     return (
         <div className='border-2 w-1/3 h-screen overflow-auto my-4' >
-            <div className='text-center text-lg border-2 text-orange-700'>Chat</div>
+            <div className='text-center text-lg  text-orange-700'>Chat</div>
+            <hr />
             {
                 names.map((ele) => {
-                    return <div className=' border-2 py-1 px-6  '>{ele}</div>
+                    return (
+                        <>
+                            <div className='py-1 px-6  '>{ele}</div>
+                            <hr />
+                        </>)
                 })
             }
         </div>

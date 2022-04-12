@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 export default function ShowImages(props) {
   const photosArray = props.photosArray;
+  const router = useRouter();
+
   return (
     <>
 
@@ -11,9 +13,15 @@ export default function ShowImages(props) {
           photosArray.map((photoDetails, idx) => {
             return (
               <>
-                <Link href={{ pathname: `/comments/${idx}`, query: { object: JSON.stringify(photoDetails) } }}>
+
+                <div className="cursor:pointer" onClick={() => {
+                  router.push({
+                    pathname: `/comments/${idx}`,
+                    query: { url: photoDetails["url"] }
+                  })
+                }}>
                   <Image src={photoDetails.thumbnailUrl} width={150} height={150} />
-                </Link>
+                </div>
               </>
 
             )
@@ -24,3 +32,4 @@ export default function ShowImages(props) {
 
   )
 }
+
